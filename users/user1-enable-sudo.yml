@@ -1,0 +1,22 @@
+--- 
+- name: enable sudo for user1 using the copy module
+  hosts: rhce2
+  become: yes
+ # the following handler doesn't get called, :'-((( whyyy  
+ # Solution: see changed_when keyword. Handlers are only notified when a change occurs!
+ 
+  handlers:
+  - name: restart sshd for no reason
+    service:
+      name: sshd
+      state: restarted
+
+  tasks: 
+  - name:  append a line enabling sudo without password for user1
+    copy:
+      content: "user1     ALL=(ALL)       NOPASSWD: ALL"
+      dest: /etc/sudoers.d/user1
+    changed_when: true
+    notify: "restart sshd for no reason" 
+
+...
