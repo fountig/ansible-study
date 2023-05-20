@@ -1,0 +1,15 @@
+# load passwords from file
+# if user is developer, then choose the corresponding password
+# if user is manager, then choose the corresponding password
+
+---
+- name: load passwords from file, create users
+  hosts: rhel2
+  vars_files:
+    - /home/ansible/playbooks/vault/users-list.facts
+  become: yes
+
+  tasks: 
+    - name: load facts
+      debug:
+        msg: "{{ user_name }} {{ first_name }} {{last_name }} {{ home_dir }} {{ role }}"

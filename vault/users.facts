@@ -1,0 +1,11 @@
+users:
+  bjones:
+    first_name: Bob
+    last_name: Jones
+    home_dir: /home/bjones
+    role_name: developer
+  acook:
+    first_name: Anne
+    last_name: Cook
+    home_dir: /home/acook
+    role_name: manager

@@ -1,0 +1,36 @@
+# this is the correct version, as close as to the exam as I can remember.
+# It iterates the users from a list of hash in users.facts. It loads the passwords
+# for each role. If the user is a manager, it gets assigned the appropriate password.
+#
+# Although it works, the problem is that the users.facts file and the user creation is 
+# repeated twice, using two when/loops. Can it be written in a more efficient manner?
+---
+- name: read hashes from facts
+  hosts: rhel2
+  vars_files:
+  - /home/ansible/playbooks/vault/users.facts
+  - /home/ansible/playbooks/vault/passwords.facts
+  become: yes
+  tasks:
+      
+    - name: create manager users
+      user:
+        name: "{{ item.key }}"
+        comment: "{{ item.value['first_name'] }} {{ item.value['last_name']}}"
+        home: "{{ item.value['home_dir'] }}"
+        password: "{{ manager | password_hash('sha512', 'salt1')}}"
+      loop: "{{ users | dict2items }}"
+      when: item.value['role_name'] == 'manager'
+
+    
+    - name: create developer users
+
+      user:
+        name: "{{ item.key }}"
+        comment: "{{ item.value['first_name'] }} {{ item.value['last_name']}}"
+        home: "{{ item.value['home_dir'] }}"
+        password: "{{ developer | password_hash('sha512', 'salt1')}}"
+      when: item.value['role_name'] == 'developer'
+      loop: "{{ users | dict2items }}"
+
+
