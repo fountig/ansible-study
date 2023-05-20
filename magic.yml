@@ -1,0 +1,12 @@
+# do task if hostname is in certain group 
+#
+---
+- name: print/test/iterate magic variables
+  hosts: all 
+  become: no
+  tasks:
+    - name: print magic variables
+      debug:
+        msg: "{{ inventory_hostname }},  {{ group_names }}"
+      when: inventory_hostname in groups['aix'] # neither host from [all] belongs to aix group, so this will be skipped. 
+...
