@@ -1,0 +1,10 @@
+---
+- name: variable test
+  hosts: rhce2
+  become: no
+
+  tasks:
+  - name: debug print
+    debug: 
+      var: ansible_facts
+...      
