@@ -1,0 +1,10 @@
+---
+- name: print variables
+  hosts: rhel
+  become: yes
+
+  tasks:
+    - name: print variables
+      debug: 
+        msg: "{{ ansible_facts['devices']['sdb']['partitions']['sdb1']['size']}}"
+
