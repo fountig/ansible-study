@@ -1,0 +1,37 @@
+--
+- name: test conditionals
+  hosts: rhel
+  become: yes 
+
+  tasks: 
+    - name: get device info
+      parted: device=/dev/sda unit=GiB
+      register: sda_info
+    
+    - name: parted storage task 1
+      debug: 
+        msg: "debug storage task 1"
+      when: sda_info.disk.size > 10
+
+    - name: storage task 2
+      debug: 
+        msg: "debug storage task 2"
+      when: sda_info.disk.size < 10
+    
+    - name: lvm get info
+      debug:
+        msg: "LV anslv exist"
+      when: ansible_lvm['lvs']['anslv'] is defined 
+    - name: vg get info
+      debug:
+        msg: "VG root exists"
+      # how can I define if it fails ?
+      when: ansible_lvm['vgs']['rel'] is defined
+    - name: fail
+      fail: 
+        msg: "VG root does not exist"
+      when: ansible_lvm['vgs']['rel'] is not defined
+
+
+
+...
