@@ -1,0 +1,11 @@
+---
+- name: test yum install
+  hosts: rhel2
+  become: yes
+
+  tasks:
+  - name: test yum install
+    yum:
+      name: httpd
+      state: latest 
+...
