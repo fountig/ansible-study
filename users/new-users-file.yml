@@ -1,0 +1,16 @@
+---
+- name: create new user, external file  example
+  hosts: rhel2
+  become: yes
+  vars_files:
+    - /home/ansible/playbooks/users/users_vars.yml
+  tasks:
+    - name: create new user
+      user:
+        name: "{{ item.username }}" 
+        shell: /bin/bash
+        groups: "{{ item.groups }} "
+
+        append: no
+        password: "$6$saltdsda1$tN4i7NCUW5XS9h7AVPu2eq5bNZ7lt2nROdipfv3y.kndgt7vYiiJhzSRrQeVHtL1cAnUTFDgiTN9hOdsgT5XR1"
+      loop: "{{ users }}"
