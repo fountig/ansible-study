@@ -1,0 +1,11 @@
+---
+- name: test copy module functions
+  hosts: rhel2
+
+  become: yes
+
+  tasks:
+   - name: copy a local file to a remote server
+     copy:
+       src: /home/ansible/rhel2.facts
+       dest: /tmp
