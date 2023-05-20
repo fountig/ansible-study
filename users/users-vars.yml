@@ -1,0 +1,12 @@
+---
+users:
+  - username: user1
+    groups: users
+  - username: user2
+    groups: users
+  - username: user3
+    groups: users
+  - username: user4
+    groups: users
+  - username: user5
+    groups: users
