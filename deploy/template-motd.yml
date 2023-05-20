@@ -1,0 +1,24 @@
+---
+- name: gather hostvars for all 
+  hosts: rhel 
+  tasks: []
+  become: yes
+  
+
+- name: test the template module
+  hosts: rhel
+  become: yes
+  vars:
+    - system_owner: gfountis@inttrust.gr
+  tasks:
+    - name: deploy the hosts template
+      template:
+        src: /home/ansible/templates/motd.j2
+        dest: /etc/motd
+        owner: root
+        group: root
+        mode: 0644
+        backup: yes
+
+
+...

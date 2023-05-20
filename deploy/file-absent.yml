@@ -1,0 +1,12 @@
+---
+- name: test common file module uses
+  hosts: rhel2
+  become: yes
+
+  tasks:
+    - name: create file with owner/group/suid permissions
+      file:
+        path: /etc/foo.conf
+        state: absent 
+
+

@@ -1,0 +1,19 @@
+---
+- name: gather hostvars for all 
+  hosts: rhel 
+  tasks: []
+  become: yes
+  
+
+- name: test the template module
+  hosts: rhel
+  become: yes
+  tasks:
+    - name: deploy the hosts template
+      template:
+        src: /home/ansible/templates/hosts.j2
+        dest: /etc/hosts
+        backup: yes
+
+
+...

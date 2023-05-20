@@ -1,0 +1,10 @@
+---
+- name: test fetch module
+  hosts: rhel2
+
+  tasks:
+    - name: test fetch
+      fetch: 
+        src: /etc/passwd
+        dest: /home/ansible/
+        flat: yes 

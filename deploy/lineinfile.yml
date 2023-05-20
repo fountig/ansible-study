@@ -1,0 +1,26 @@
+---
+- name: test common file module uses
+  hosts: rhel2
+  become: yes
+
+# lineinfile clears suid bit after adding line ??
+  tasks:
+    - name: add multiple lines  to /etc/foo.conf 
+      blockinfile:
+        path: /etc/foo.conf
+        content: |
+          This is line 1
+          This is line 2
+
+    - name: add a single line to /etc/foo.conf
+      lineinfile:
+        path: /etc/foo.conf
+        line: "This is a single line using lineinfile"
+    - name: create file with owner/group/suid permissions
+      file:
+        path: /etc/foo.conf
+        owner: root
+        group: wheel
+        mode: '4755'
+        state: touch
+

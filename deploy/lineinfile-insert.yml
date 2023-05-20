@@ -1,0 +1,18 @@
+---
+- name: test common file module uses
+  hosts: rhel2
+  become: yes
+
+# lineinfile clears suid bit after adding line ??
+  tasks:
+
+    - name: add a single line to /etc/foo.conf
+      lineinfile:
+        path: /etc/foo.conf
+        line: "This is a single line using lineinfile"
+    - name: change a line matching with a regexp
+      lineinfile:
+        path: /etc/foo.conf
+        regexp: '^key1='
+        line: 'key1=vvvvvvv'
+

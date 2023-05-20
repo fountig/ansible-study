@@ -1,0 +1,21 @@
+---
+- name: test common file module uses
+  hosts: rhel2
+  become: yes
+
+  tasks:
+    - name: create file with owner/group/suid permissions
+      file:
+        path: /etc/foo.conf
+        owner: root
+        group: wheel
+        mode: '4755'
+        state: touch 
+    - name: add content to /etc/foo.conf 
+      blockinfile:
+        path: /etc/foo.conf
+        content: |
+          This is line 1
+          This is line 2
+
+
