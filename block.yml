@@ -1,0 +1,15 @@
+---
+- name: test block keyword
+  hosts: rhel
+  become: yes
+
+  tasks:
+    - name: test block 
+      block:
+       - name: print inside block
+         debug:
+           msg: "Inside block 1"
+       - name: print inside block 
+         debug:
+           msg: "Inside block 1"
+...
