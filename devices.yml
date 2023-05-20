@@ -1,0 +1,10 @@
+---
+- name: test/print of storage devices 
+  hosts: rhel
+  become: yes
+
+  tasks:
+    - name: debug print of storage devices for each inventory_hostname
+      debug:
+        msg: "{{ ansible_facts['devices']['sda']['partitions']['sda1']['size'] }}" # this returns "600.0 MB" as a string, so you can't do conditionals.
+        # use the example from storage/
