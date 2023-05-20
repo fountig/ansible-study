@@ -1,0 +1,13 @@
+---
+- name: create new user, simple example
+  hosts: rhel
+  become: yes
+
+  tasks:
+    - name: create new user
+      user:
+        name: fikos
+        shell: /bin/bash
+        groups: wheel
+        append: no
+        password: "$6$saltdsda1$tN4i7NCUW5XS9h7AVPu2eq5bNZ7lt2nROdipfv3y.kndgt7vYiiJhzSRrQeVHtL1cAnUTFDgiTN9hOdsgT5XR1"
