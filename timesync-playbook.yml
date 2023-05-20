@@ -1,0 +1,7 @@
+--
+- name: Configure and install timesync role to rhel3
+  hosts: rhel3
+  become: yes
+  roles: 
+    - rhel-system-roles.timesync
+...
