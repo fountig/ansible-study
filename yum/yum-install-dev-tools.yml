@@ -1,0 +1,10 @@
+--- 
+- name: Install development tools
+  hosts: rhel2
+  become: yes
+
+  tasks:
+  - name: install development tools
+    dnf:
+      name: '@Development Tools'
+      state: present
