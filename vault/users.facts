@@ -1,11 +1,11 @@
 users:
   bjones:
-    first_name: Bob
-    last_name: Jones
-    home_dir: /home/bjones
+    first_name: John
+    last_name: Fistikis
+    home_dir: /home/jf
     role_name: developer
   acook:
-    first_name: Anne
-    last_name: Cook
-    home_dir: /home/acook
+    first_name: Anna
+    last_name: Banana
+    home_dir: /home/abanana
     role_name: manager
