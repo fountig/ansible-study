@@ -1,0 +1,11 @@
+---
+- name: test hostvars
+  hosts: rhel
+  become: yes
+
+  tasks: 
+  - name: print hostvars
+    debug: 
+      msg: "{{ hostvars }}"
+...
+
