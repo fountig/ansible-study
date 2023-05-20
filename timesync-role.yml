@@ -1,0 +1,13 @@
+---
+- name: Configure and install timesync role to rhel3
+  hosts: rhel3
+  become: yes
+  vars:
+    timesync_ntp_servers:
+      - hostname: gr.pool.ntp.org
+        pool: yes
+        iburst: yes
+
+  roles: 
+    - rhel-system-roles.timesync
+...
