@@ -1,0 +1,15 @@
+---
+- name: print parted info for a partition
+  hosts: rhel
+  become: yes
+
+  tasks:
+    - name: get disk size 
+      parted: 
+       device: /dev/sda3 
+       unit: GiB
+      register: sda3_info
+    - name: print disk size
+      debug:
+        msg: 'sda3 is larger than 10 G!'
+      when: sda3_info.disk.size > 10
