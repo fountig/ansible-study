@@ -1,0 +1,39 @@
+---
+- name: test block/always/rescue keywords
+  hosts: rhel
+  become: yes
+
+  tasks:
+    - name: test block 
+      block:
+        - name: print inside block
+          debug:
+            msg: "Inside block 1"
+        - name: print inside block 2
+          debug:
+            msg: "Inside block 2"
+        - name: install foo package, destined to fail
+          dnf: 
+            name: foo
+            state: present
+      
+     
+      rescue:
+        - name: rescue block
+          debug:
+            msg: "this is rescue block"
+          changed_when: true # in order for the notify handler to be triggered, there needs to be a change.
+          notify: after_rescue
+      
+      always:
+        - name: this is always executed
+          debug:
+            msg: "This is always block"
+
+  handlers:
+    - name: after_rescue
+      debug:
+        msg: "This is the after_rescue handler, triggered by the rescue block and the changed_when keyword"
+
+
+...
