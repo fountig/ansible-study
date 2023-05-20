@@ -1,0 +1,33 @@
+---
+- name: create partition with parted
+  hosts: rhel2
+  become: yes
+
+  tasks:
+        - name: get disk size of sdb
+          parted:
+            device: /dev/sdb
+            unit: GiB
+          register: sdb_info
+                
+        - name: storage tasks block
+
+          block:
+          
+          - name: create a 2G partition using parted
+            parted:
+              device: /dev/sdb
+              state: present
+              number: 1
+              part_end: 2GB
+          
+          - name: print debug message inside block
+            debug:
+              msg: This executes inside the block
+         
+          - name: print debug message no 2 inside block
+            debug:
+              msg: this executetes (for 2nd time) inside the block
+          
+          when: sdb_info.disk.size > 20 
+...
