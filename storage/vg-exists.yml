@@ -1,0 +1,23 @@
+---
+- name: test whether a VG exists
+  hosts: rhel2
+  become: yes
+  vars:
+    - VG: "test1x"
+
+  tasks:
+    - name: test whether vg exists
+      shell: "vgs --noheadings --all | grep {{ VG }}"
+      ignore_errors: true
+      register: result   
+  
+    - name: print result
+      debug:
+        msg: Exists
+      when: result.rc == 0
+   
+   - name: print result when doesnt
+      debug: 
+        msg: Doesn't exist
+      when: result.rc == 1
+...
