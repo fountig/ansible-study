@@ -1,0 +1,10 @@
+---
+- name: print ansible_local 
+  hosts: rhel
+  become: yes
+
+  tasks:
+  - name: debug ansible_local
+    debug:
+      msg: "{{ansible_local}}"
+...
